@@ -6,11 +6,27 @@ import {
   useEscapeKeyPress,
   useSpacebarKeyPress,
 } from '@/hooks/enterKey'
-import { getAnimeEpisodes } from '@/lib/anime'
+import { getAnimeEpisodes, getAnimeStreamingLinks } from '@/lib/anime'
 import { cn } from '@/lib/utils'
 import { useQuery } from '@tanstack/react-query'
-import { useEffect, useRef, useState } from 'react'
+import { Dispatch, SetStateAction, useEffect, useRef, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
+import {
+  Credenza,
+  CredenzaBody,
+  CredenzaClose,
+  CredenzaContent,
+  CredenzaDescription,
+  CredenzaFooter,
+  CredenzaHeader,
+  CredenzaTitle,
+} from '@/components/ui/credenza'
+import { MediaPlayer, MediaProvider, MediaSrc } from '@vidstack/react'
+import { StreamEpisode } from '@/types/anime'
+import {
+  DefaultVideoLayout,
+  defaultLayoutIcons,
+} from '@vidstack/react/player/layouts/default'
 
 export default function Info() {
   const { id } = useParams()
@@ -21,6 +37,9 @@ export default function Info() {
 
   const [selectedItemIndex, setSelectedItemIndex] = useState<number>(0)
   const [searchQuery, setSearchQuery] = useState<string>('')
+
+  const [modalOpen, setModalOpen] = useState<boolean>(false)
+  const [episodeId, setEpisodeId] = useState<string>('')
 
   const { data, error, isLoading } = useQuery({
     queryKey: ['info', id],
@@ -60,8 +79,9 @@ export default function Info() {
   useEnterKeyPress(() => {
     const selectedEpisode = filteredData?.[selectedItemIndex]
     if (selectedEpisode) {
-      navigate(`/watch/${selectedEpisode.id}`)
+      setEpisodeId(selectedEpisode.id)
     }
+    setModalOpen(true)
   })
 
   useSpacebarKeyPress(() => {
@@ -96,7 +116,11 @@ export default function Info() {
       <div className='flex flex-col items-start'>
         {filteredData?.map((item, index) => (
           <Button
-            onClick={() => navigate(`/watch/${item.id}`)}
+            // onClick={() => navigate(`/watch/${item.id}`)}
+            onClick={() => {
+              setModalOpen(true)
+              setEpisodeId(item.id)
+            }}
             variant='linkHover2'
             key={item.id}
             className={cn(
@@ -110,6 +134,97 @@ export default function Info() {
           </Button>
         ))}
       </div>
+      <Modal
+        episodeId={episodeId}
+        modalOpen={modalOpen}
+        setModalOpen={setModalOpen}
+      />
     </div>
+  )
+}
+
+interface ModalProps {
+  modalOpen: boolean
+  setModalOpen: Dispatch<SetStateAction<boolean>>
+  episodeId: string
+}
+
+function Modal({ modalOpen, setModalOpen, episodeId }: ModalProps) {
+  const { data, error, isLoading } = useQuery({
+    queryKey: ['watch', episodeId],
+    queryFn: () => getAnimeStreamingLinks(episodeId!),
+  })
+
+  const transformedUrls: MediaSrc[] = data?.sources?.map(
+    (item: StreamEpisode) => {
+      let width, height
+      switch (item.quality) {
+        case '360p':
+          width = 640
+          height = 360
+          break
+        case '480p':
+          width = 854
+          height = 480
+          break
+        case '720p':
+          width = 1280
+          height = 720
+          break
+        case '1080p':
+          width = 1920
+          height = 1080
+          break
+        default:
+          width = height = null
+      }
+
+      return {
+        src: item.url,
+        type: 'application/x-mpegURL',
+        width,
+        height,
+      }
+    }
+  )
+  return (
+    <Credenza open={modalOpen} onOpenChange={setModalOpen}>
+      <CredenzaContent>
+        <CredenzaHeader>
+          <CredenzaTitle>Credenza</CredenzaTitle>
+          <CredenzaDescription>
+            A responsive modal component for shadcn/ui.
+          </CredenzaDescription>
+        </CredenzaHeader>
+        <CredenzaBody>
+          {isLoading && <LoaderText text='Video' />}
+
+          {error && <p>Try again later.</p>}
+
+          {data?.sources && (
+            <div className='aspect-video'>
+              <MediaPlayer
+                title='Sprite Fight'
+                src={transformedUrls}
+                load='eager'
+                autoPlay={true}
+                playsInline
+              >
+                <MediaProvider />
+                <DefaultVideoLayout
+                  // thumbnails='https://files.vidstack.io/sprite-fight/thumbnails.vtt'
+                  icons={defaultLayoutIcons}
+                />
+              </MediaPlayer>
+            </div>
+          )}
+        </CredenzaBody>
+        <CredenzaFooter>
+          <CredenzaClose asChild>
+            <button>Close</button>
+          </CredenzaClose>
+        </CredenzaFooter>
+      </CredenzaContent>
+    </Credenza>
   )
 }
