@@ -4,6 +4,10 @@ import Nav from '@/components/nav'
 import { Outlet } from 'react-router-dom'
 import { ThemeProvider } from '../components/theme-provider'
 
+import '@vidstack/react/player/styles/default/theme.css'
+import '@vidstack/react/player/styles/default/layouts/audio.css'
+import '@vidstack/react/player/styles/default/layouts/video.css'
+
 // Create a client
 const queryClient = new QueryClient()
 

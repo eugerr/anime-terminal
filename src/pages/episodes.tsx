@@ -107,6 +107,7 @@ export default function Info() {
             onClick={() => {
               setModalOpen(true)
               setEpisodeId(item.id)
+              setSelectedItemIndex(index)
             }}
             key={item.id}
             className={cn(
@@ -120,7 +121,6 @@ export default function Info() {
         ))}
       </div>
       <Modal
-        animeId={id}
         episodeDetail={filteredData?.[selectedItemIndex]}
         episodeId={episodeId}
         modalOpen={modalOpen}

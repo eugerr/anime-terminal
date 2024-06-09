@@ -2,7 +2,6 @@ import {
   Dialog,
   DialogClose,
   DialogContent,
-  DialogDescription,
   DialogFooter,
   DialogHeader,
   DialogTitle,
@@ -23,7 +22,6 @@ interface ModalProps {
   setModalOpen: Dispatch<SetStateAction<boolean>>
   episodeId: string
   episodeDetail: Episode | undefined
-  animeId: string | undefined
 }
 
 export function Modal({
@@ -31,14 +29,11 @@ export function Modal({
   setModalOpen,
   episodeId,
   episodeDetail,
-  animeId,
 }: ModalProps) {
   const { data, error, isLoading } = useQuery({
     queryKey: ['watch', episodeId],
     queryFn: () => getAnimeStreamingLinks(episodeId!),
   })
-
-  console.log(animeId)
 
   const transformedUrls: MediaSrc[] = data?.sources?.map(
     (item: StreamEpisode) => {
@@ -72,14 +67,16 @@ export function Modal({
       }
     }
   )
-  console.log(episodeDetail)
 
   return (
     <Dialog open={modalOpen} onOpenChange={setModalOpen}>
       <DialogContent>
         <DialogHeader>
-          <DialogTitle>Credenza</DialogTitle>
-          <DialogDescription>Episode {episodeDetail?.number}</DialogDescription>
+          <DialogTitle>
+            {episodeDetail?.id
+              .replace(/-/g, ' ')
+              .replace(/\b\w/g, (char) => char.toUpperCase())}
+          </DialogTitle>
         </DialogHeader>
         <div>
           {isLoading && <LoaderText text='Video' />}
@@ -93,6 +90,7 @@ export function Modal({
                 src={transformedUrls}
                 load='eager'
                 autoPlay={true}
+                poster={episodeDetail?.image}
               >
                 <MediaProvider />
                 <DefaultVideoLayout
