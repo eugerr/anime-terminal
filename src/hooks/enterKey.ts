@@ -31,3 +31,20 @@ export const useEscapeKeyPress = (callback: () => void) => {
     }
   }, [callback])
 }
+
+export const useSpacebarKeyPress = (callback: () => void) => {
+  useEffect(() => {
+    const handleKeyPress = (event: KeyboardEvent) => {
+      if (event.key === ' ' || event.key === 'Spacebar') {
+        event.preventDefault() // Prevent spacebar from scrolling the page
+        callback()
+      }
+    }
+
+    document.addEventListener('keydown', handleKeyPress)
+
+    return () => {
+      document.removeEventListener('keydown', handleKeyPress)
+    }
+  }, [callback])
+}
