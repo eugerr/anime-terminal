@@ -68,15 +68,15 @@ export function Modal({
     }
   )
 
+  const epTitle = episodeDetail?.id
+    .replace(/-/g, ' ')
+    .replace(/\b\w/g, (char) => char.toUpperCase())
+
   return (
     <Dialog open={modalOpen} onOpenChange={setModalOpen}>
       <DialogContent>
         <DialogHeader>
-          <DialogTitle>
-            {episodeDetail?.id
-              .replace(/-/g, ' ')
-              .replace(/\b\w/g, (char) => char.toUpperCase())}
-          </DialogTitle>
+          <DialogTitle>{epTitle}</DialogTitle>
         </DialogHeader>
         <div>
           {isLoading && <LoaderText text='Video' />}
@@ -86,11 +86,12 @@ export function Modal({
           {data?.sources && (
             <div className='aspect-video'>
               <MediaPlayer
-                title='Sprite Fight'
+                title={epTitle}
                 src={transformedUrls}
                 load='eager'
                 autoPlay={true}
                 poster={episodeDetail?.image}
+                playsInline={true}
               >
                 <MediaProvider />
                 <DefaultVideoLayout
