@@ -3,12 +3,20 @@ import { Link, useLocation } from 'react-router-dom'
 export default function Nav() {
   const location = useLocation()
 
+  const isHomePage = location.pathname === '/'
   const isWatchPage = location.pathname.includes('/watch')
   const isResultsPage = location.pathname.includes('/results')
   const isEpisodesPage = location.pathname.includes('/episodes')
   return (
     <nav className='flex justify-between items-center container my-10 font-mono text-xs md:text-sm lg:text-base'>
       <div className='flex items-center gap-2'>
+        {isHomePage && (
+          <h1>
+            anime@
+            <span className='text-green-500'>terminal</span>
+            :~$ <span className='text-yellow-500'>welcome</span>
+          </h1>
+        )}
         {isWatchPage && (
           <>
             <Link to='/'>home</Link>/

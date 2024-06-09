@@ -2,7 +2,7 @@ export default function Hero() {
   return (
     <header className='relative'>
       <div>
-        <pre>
+        <pre className='hidden md:block'>
           <code>{`
 ░█░░░█░█▀▀▄░▀█▀░█▀▄░█░░░░░░█▀▀▄░█▀▀▄░░▀░░█▀▄▀█░█▀▀
 ░▀▄█▄▀░█▄▄█░░█░░█░░░█▀▀█░░░█▄▄█░█░▒█░░█▀░█░▀░█░█▀▀
