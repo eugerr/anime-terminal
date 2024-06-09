@@ -6,6 +6,13 @@ import {
   DialogHeader,
   DialogTitle,
 } from '@/components/ui/dialog'
+import {
+  Drawer,
+  DrawerContent,
+  DrawerHeader,
+  DrawerTitle,
+} from '@/components/ui/drawer'
+import { useMediaQuery } from '@/hooks/use-media-query'
 import { getAnimeStreamingLinks } from '@/lib/anime'
 import { Episode, StreamEpisode } from '@/types/anime'
 import { useQuery } from '@tanstack/react-query'
@@ -17,7 +24,6 @@ import {
 import { Dispatch, SetStateAction } from 'react'
 import LoaderText from './loader-text'
 import { Skeleton } from './ui/skeleton'
-
 interface ModalProps {
   modalOpen: boolean
   setModalOpen: Dispatch<SetStateAction<boolean>>
@@ -35,6 +41,8 @@ export function Modal({
     queryKey: ['watch', episodeId],
     queryFn: () => getAnimeStreamingLinks(episodeId!),
   })
+
+  const isDesktop = useMediaQuery('(min-width: 768px)')
 
   const transformedUrls: MediaSrc[] = data?.sources?.map(
     (item: StreamEpisode) => {
@@ -73,12 +81,57 @@ export function Modal({
     .replace(/-/g, ' ')
     .replace(/\b\w/g, (char) => char.toUpperCase())
 
+  if (isDesktop) {
+    return (
+      <Dialog open={modalOpen} onOpenChange={setModalOpen}>
+        <DialogContent>
+          <DialogHeader>
+            <DialogTitle>{epTitle}</DialogTitle>
+          </DialogHeader>
+          <div>
+            {isLoading && (
+              <>
+                <LoaderText text='Video' />
+                <Skeleton className='h-[45vh]' />
+              </>
+            )}
+
+            {error && <p>Try again later.</p>}
+
+            {data?.sources && (
+              <div className='aspect-video'>
+                <MediaPlayer
+                  title={epTitle}
+                  src={transformedUrls}
+                  load='eager'
+                  autoPlay={true}
+                  poster={episodeDetail?.image}
+                  playsInline={true}
+                >
+                  <MediaProvider />
+                  <DefaultVideoLayout
+                    // thumbnails='https://files.vidstack.io/sprite-fight/thumbnails.vtt'
+                    icons={defaultLayoutIcons}
+                  />
+                </MediaPlayer>
+              </div>
+            )}
+          </div>
+          <DialogFooter>
+            <DialogClose asChild>
+              <button>Close</button>
+            </DialogClose>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
+    )
+  }
   return (
-    <Dialog open={modalOpen} onOpenChange={setModalOpen}>
-      <DialogContent>
-        <DialogHeader>
-          <DialogTitle>{epTitle}</DialogTitle>
-        </DialogHeader>
+    <Drawer open={modalOpen} onOpenChange={setModalOpen}>
+      <DrawerContent className='px-2'>
+        <DrawerHeader>
+          <DrawerTitle>{epTitle}</DrawerTitle>
+        </DrawerHeader>
         <div>
           {isLoading && (
             <>
@@ -108,12 +161,7 @@ export function Modal({
             </div>
           )}
         </div>
-        <DialogFooter>
-          <DialogClose asChild>
-            <button>Close</button>
-          </DialogClose>
-        </DialogFooter>
-      </DialogContent>
-    </Dialog>
+      </DrawerContent>
+    </Drawer>
   )
 }
