@@ -12,15 +12,14 @@ import { useQuery } from '@tanstack/react-query'
 import { Dispatch, SetStateAction, useEffect, useRef, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import {
-  Credenza,
-  CredenzaBody,
-  CredenzaClose,
-  CredenzaContent,
-  CredenzaDescription,
-  CredenzaFooter,
-  CredenzaHeader,
-  CredenzaTitle,
-} from '@/components/ui/credenza'
+  Dialog,
+  DialogClose,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+} from '@/components/ui/dialog'
 import { MediaPlayer, MediaProvider, MediaSrc } from '@vidstack/react'
 import { StreamEpisode } from '@/types/anime'
 import {
@@ -188,15 +187,15 @@ function Modal({ modalOpen, setModalOpen, episodeId }: ModalProps) {
     }
   )
   return (
-    <Credenza open={modalOpen} onOpenChange={setModalOpen}>
-      <CredenzaContent>
-        <CredenzaHeader>
-          <CredenzaTitle>Credenza</CredenzaTitle>
-          <CredenzaDescription>
+    <Dialog open={modalOpen} onOpenChange={setModalOpen}>
+      <DialogContent>
+        <DialogHeader>
+          <DialogTitle>Credenza</DialogTitle>
+          <DialogDescription>
             A responsive modal component for shadcn/ui.
-          </CredenzaDescription>
-        </CredenzaHeader>
-        <CredenzaBody>
+          </DialogDescription>
+        </DialogHeader>
+        <div>
           {isLoading && <LoaderText text='Video' />}
 
           {error && <p>Try again later.</p>}
@@ -217,13 +216,13 @@ function Modal({ modalOpen, setModalOpen, episodeId }: ModalProps) {
               </MediaPlayer>
             </div>
           )}
-        </CredenzaBody>
-        <CredenzaFooter>
-          <CredenzaClose asChild>
+        </div>
+        <DialogFooter>
+          <DialogClose asChild>
             <button>Close</button>
-          </CredenzaClose>
-        </CredenzaFooter>
-      </CredenzaContent>
-    </Credenza>
+          </DialogClose>
+        </DialogFooter>
+      </DialogContent>
+    </Dialog>
   )
 }
