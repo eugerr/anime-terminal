@@ -8,7 +8,6 @@ import Results from './pages/results.tsx'
 import Root from './pages/root.tsx'
 import Layout from './pages/layout.tsx'
 import Episodes from './pages/episodes.tsx'
-import Watch from './pages/watch.tsx'
 
 const router = createBrowserRouter([
   {
@@ -25,10 +24,6 @@ const router = createBrowserRouter([
       {
         path: '/episodes/:id',
         element: <Episodes />,
-      },
-      {
-        path: '/watch/:id',
-        element: <Watch />,
       },
     ],
     errorElement: <ErrorPage />,

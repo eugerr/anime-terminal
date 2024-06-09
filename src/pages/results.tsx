@@ -1,11 +1,10 @@
 import LoaderText from '@/components/loader-text'
-import { Button } from '@/components/ui/button'
 import { useEnterKeyPress, useEscapeKeyPress } from '@/hooks/enterKey'
 import { searchAnime } from '@/lib/anime'
 import { cn } from '@/lib/utils'
 import { useQuery } from '@tanstack/react-query'
 import { useEffect, useState } from 'react'
-import { useNavigate, useParams } from 'react-router-dom'
+import { Link, useNavigate, useParams } from 'react-router-dom'
 
 export default function Results() {
   const { id } = useParams()
@@ -68,18 +67,18 @@ export default function Results() {
       ) : (
         <div className='flex flex-col items-start'>
           {data?.results.map((item, index) => (
-            <Button
-              variant='linkHover2'
+            <Link
+              to='#'
               key={item.id}
               onClick={() => navigate(`/episodes/${item.id}`)}
               className={cn(
-                index === selectedItemIndex
-                  ? 'underline hover:after:scale-x-0'
-                  : ''
+                index === selectedItemIndex &&
+                  'underline hover:after:scale-x-0',
+                'hover:underline'
               )}
             >
               {item.title.english || item.title.userPreferred}
-            </Button>
+            </Link>
           ))}
         </div>
       )}
