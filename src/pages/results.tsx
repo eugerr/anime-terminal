@@ -1,3 +1,4 @@
+import LoaderText from '@/components/loader-text'
 import { Button } from '@/components/ui/button'
 import { useEnterKeyPress, useEscapeKeyPress } from '@/hooks/enterKey'
 import { searchAnime } from '@/lib/anime'
@@ -49,16 +50,16 @@ export default function Results() {
   })
 
   useEnterKeyPress(() =>
-    navigate(`/info/${data?.results?.[selectedItemIndex].id}`)
+    navigate(`/episodes/${data?.results?.[selectedItemIndex].id}`)
   )
 
   return (
     <div>
       <h1>
-        Search results for : <span className='text-red-500'>{id}</span>
+        Search results for : <span className='text-green-500'>{id}</span>
       </h1>
 
-      {isLoading && <p>loading...</p>}
+      {isLoading && <LoaderText text={id} />}
 
       {error && <p>Try again later.</p>}
 
@@ -70,14 +71,14 @@ export default function Results() {
             <Button
               variant='linkHover2'
               key={item.id}
-              onClick={() => navigate(`/info/${item.id}`)}
+              onClick={() => navigate(`/episodes/${item.id}`)}
               className={cn(
                 index === selectedItemIndex
                   ? 'underline hover:after:scale-x-0'
                   : ''
               )}
             >
-              {item.title.english}
+              {item.title.english || item.title.userPreferred}
             </Button>
           ))}
         </div>

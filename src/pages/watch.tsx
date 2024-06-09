@@ -11,6 +11,7 @@ import { StreamEpisode } from '@/types/anime'
 import '@vidstack/react/player/styles/default/layouts/audio.css'
 import '@vidstack/react/player/styles/default/layouts/video.css'
 import '@vidstack/react/player/styles/default/theme.css'
+import LoaderText from '@/components/loader-text'
 
 export default function Watch() {
   const { id } = useParams()
@@ -55,7 +56,7 @@ export default function Watch() {
 
   return (
     <div>
-      {isLoading && <p>loading...</p>}
+      {isLoading && <LoaderText text='Video' />}
 
       {error && <p>Try again later.</p>}
 

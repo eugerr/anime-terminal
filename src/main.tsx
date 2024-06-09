@@ -7,7 +7,7 @@ import ErrorPage from '@/pages/error-page.tsx'
 import Results from './pages/results.tsx'
 import Root from './pages/root.tsx'
 import Layout from './pages/layout.tsx'
-import Info from './pages/info.tsx'
+import Episodes from './pages/episodes.tsx'
 import Watch from './pages/watch.tsx'
 
 const router = createBrowserRouter([
@@ -23,8 +23,8 @@ const router = createBrowserRouter([
         element: <Results />,
       },
       {
-        path: '/info/:id',
-        element: <Info />,
+        path: '/episodes/:id',
+        element: <Episodes />,
       },
       {
         path: '/watch/:id',

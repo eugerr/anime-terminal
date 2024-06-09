@@ -12,7 +12,7 @@ export default function Layout() {
     <QueryClientProvider client={queryClient}>
       <ThemeProvider defaultTheme='dark' storageKey='vite-ui-theme'>
         <Nav />
-        <main className='container font-mono'>
+        <main className='container font-mono text-xs md:text-sm lg:text-base'>
           <Outlet />
         </main>
       </ThemeProvider>

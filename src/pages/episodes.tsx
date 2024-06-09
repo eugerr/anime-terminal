@@ -1,3 +1,4 @@
+import LoaderText from '@/components/loader-text'
 import { Button } from '@/components/ui/button'
 import { useEnterKeyPress, useEscapeKeyPress } from '@/hooks/enterKey'
 import { getAnimeEpisodes } from '@/lib/anime'
@@ -52,7 +53,7 @@ export default function Info() {
 
   return (
     <div>
-      {isLoading && <p>loading...</p>}
+      {isLoading && <LoaderText text='Episodes' />}
 
       {error && <p>Try again later.</p>}
 
