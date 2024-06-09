@@ -79,6 +79,9 @@ export default function Info() {
       item.number === selectedItemIndex
   )
 
+  const isFirstEpisode = selectedItemIndex === 0
+  const isLastEpisode = selectedItemIndex === (filteredData?.length || 0) - 1
+
   return (
     <div>
       {!isLoading && (
@@ -121,6 +124,10 @@ export default function Info() {
         ))}
       </div>
       <Modal
+        isFirstEpisode={isFirstEpisode}
+        isLastEpisode={isLastEpisode}
+        selectedItemIndex={selectedItemIndex}
+        setSelectedItemIndex={setSelectedItemIndex}
         episodeDetail={filteredData?.[selectedItemIndex]}
         episodeId={episodeId}
         modalOpen={modalOpen}
