@@ -208,7 +208,6 @@ function Modal({ modalOpen, setModalOpen, episodeId }: ModalProps) {
                 src={transformedUrls}
                 load='eager'
                 autoPlay={true}
-                playsInline
               >
                 <MediaProvider />
                 <DefaultVideoLayout
