@@ -25,13 +25,13 @@ export default function Root() {
       <div className='flex flex-col'>
         <div className='flex md:items-center flex-col md:flex-row'>
           <p className='hidden'>
-            visitor@
+            user@
             <span className='text-red-500'>terminal.satnaing.dev</span>
             :~$
           </p>
           <div className='flex items-center gap-2'>
             <p>
-              visitor@
+              user@
               <span className='text-green-500'>terminal</span>
               :~$
             </p>

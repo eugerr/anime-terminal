@@ -16,6 +16,7 @@ import {
 } from '@vidstack/react/player/layouts/default'
 import { Dispatch, SetStateAction } from 'react'
 import LoaderText from './loader-text'
+import { Skeleton } from './ui/skeleton'
 
 interface ModalProps {
   modalOpen: boolean
@@ -79,7 +80,12 @@ export function Modal({
           <DialogTitle>{epTitle}</DialogTitle>
         </DialogHeader>
         <div>
-          {isLoading && <LoaderText text='Video' />}
+          {isLoading && (
+            <>
+              <LoaderText text='Video' />
+              <Skeleton className='h-[45vh]' />
+            </>
+          )}
 
           {error && <p>Try again later.</p>}
 
