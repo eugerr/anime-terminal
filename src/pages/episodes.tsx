@@ -53,6 +53,10 @@ export default function Info() {
   }, [data])
 
   useEscapeKeyPress(() => {
+    // default behavior for modal
+    if (modalOpen) {
+      return
+    }
     setSelectedItemIndex(-1) // Reset selection when Escape key is pressed
     navigate(-1)
   })
