@@ -2,13 +2,6 @@
 
 Anime@Terminal is a minimalist anime streaming website with a unique terminal-inspired interface.
 
-## Screenshots:
-
-<img src="public/screenshots/screenshot1.png" alt="Screenshot 1" width="300">
-<img src="public/screenshots/screenshot2.png" alt="Screenshot 2" width="300">
-<img src="public/screenshots/screenshot3.png" alt="Screenshot 3" width="300">
-
-
 ## Features:
 
 - Terminal-Like Interface
@@ -16,6 +9,20 @@ Anime@Terminal is a minimalist anime streaming website with a unique terminal-in
 - Curated Streaming Library
 - Search Functionality
 - Responsive Design
+
+## Screenshots:
+
+<div style="display: flex; flex-direction: row;">
+  <img src="/public/screenshots/screenshot1.png" alt="Screenshot 1" width="250" style="margin-right: 10px;">
+  <img src="/public/screenshots/screenshot2.png" alt="Screenshot 2" width="250" style="margin-right: 10px;">
+  <img src="/public/screenshots/screenshot3.png" alt="Screenshot 3" width="250">
+</div>
+
+## Usage:
+
+1. Navigate using arrow keys or keyboard shortcuts.
+2. Select anime to stream.
+3. Enjoy watching!
 
 ## Getting Started:
 
