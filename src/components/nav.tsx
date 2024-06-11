@@ -26,10 +26,10 @@ export default function Nav() {
                 <span className='text-green-500'>terminal</span>
                 :$~{' '}
                 {currentHourt < 12
-                  ? 'Good morning'
+                  ? 'good morning'
                   : currentHourt < 18
-                  ? 'Good fternoon'
-                  : 'good eveneingW'}
+                  ? 'good afternoon'
+                  : 'good evening'}
               </h1>
               <p># Minimal anime experience</p>
               <p># Search anime and press Enter</p>

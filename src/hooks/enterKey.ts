@@ -19,7 +19,7 @@ export const useEnterKeyPress = (callback: () => void) => {
 export const useEscapeKeyPress = (callback: () => void) => {
   useEffect(() => {
     const handleKeyPress = (event: KeyboardEvent) => {
-      if (event.keyCode === 27) {
+      if (event.keyCode === 27 || event.keyCode === 8) {
         callback()
       }
     }
