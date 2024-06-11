@@ -1,3 +1,4 @@
+import { Helmet } from 'react-helmet'
 import LoaderText from '@/components/loader-text'
 import { useEnterKeyPress, useEscapeKeyPress } from '@/hooks/enterKey'
 import { searchAnime } from '@/lib/anime'
@@ -8,11 +9,8 @@ import { Link, useNavigate, useParams } from 'react-router-dom'
 
 export default function Results() {
   const { id } = useParams()
-
   const navigate = useNavigate()
-
   const [selectedItemIndex, setSelectedItemIndex] = useState<number>(0)
-
   const { data, error, isLoading } = useQuery({
     queryKey: ['results', id],
     queryFn: () => searchAnime(id!),
@@ -54,6 +52,9 @@ export default function Results() {
 
   return (
     <div>
+      <Helmet>
+        <title>Search Results for {id}</title>
+      </Helmet>
       <h1>
         Search results for : <span className='text-green-500'>{id}</span>
       </h1>

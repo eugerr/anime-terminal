@@ -26,10 +26,10 @@ export default function Root() {
 
   return (
     <>
-      <div className='flex flex-col pb-20'>
+      <div className='flex flex-col'>
         <div className='flex md:items-center flex-col sm:flex-row'>
           <p>
-            user@
+            anime@
             <span className='text-green-500'>terminal</span>
             :~$
           </p>

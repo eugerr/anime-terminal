@@ -1,7 +1,10 @@
 import { ModeToggle } from './mode-toggle'
 import { Link, useLocation } from 'react-router-dom'
+
 export default function Nav() {
   const location = useLocation()
+
+  const currentHourt = new Date().getHours()
 
   const isHomePage = location.pathname === '/'
   const isWatchPage = location.pathname.includes('/watch')
@@ -19,14 +22,17 @@ export default function Nav() {
           {isHomePage && (
             <>
               <h1>
-                Welcome, guest@
+                Welcome, anime@
                 <span className='text-green-500'>terminal</span>
-                :$~
+                :$~{' '}
+                {currentHourt < 12
+                  ? 'Good morning'
+                  : currentHourt < 18
+                  ? 'Good fternoon'
+                  : 'good eveneingW'}
               </h1>
-              <p>Experience anime like never before.</p>
-              <p>---</p>
-              <p>Discover and watch anime with a minimalist touch.</p>
-              <p>---</p>
+              <p># Minimal anime experience</p>
+              <p># Search anime and press Enter</p>
             </>
           )}
           {isWatchPage && (

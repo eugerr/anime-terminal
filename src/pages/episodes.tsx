@@ -1,3 +1,4 @@
+import { Helmet } from 'react-helmet'
 import LoaderText from '@/components/loader-text'
 import { Input } from '@/components/ui/input'
 import {
@@ -10,19 +11,14 @@ import { cn } from '@/lib/utils'
 import { useQuery } from '@tanstack/react-query'
 import { useEffect, useRef, useState } from 'react'
 import { Link, useNavigate, useParams } from 'react-router-dom'
-
 import { Modal } from '@/components/modal'
 
 export default function Info() {
   const { id } = useParams()
-
   const navigate = useNavigate()
-
   const inputRef = useRef<HTMLInputElement | null>(null)
-
   const [selectedItemIndex, setSelectedItemIndex] = useState<number>(0)
   const [searchQuery, setSearchQuery] = useState<string>('')
-
   const [modalOpen, setModalOpen] = useState<boolean>(false)
   const [episodeId, setEpisodeId] = useState<string>('')
 
@@ -84,6 +80,9 @@ export default function Info() {
 
   return (
     <div>
+      <Helmet>
+        <title>{filteredData?.[selectedItemIndex].title}</title>
+      </Helmet>
       {!isLoading && (
         <Input
           ref={inputRef}
@@ -100,7 +99,6 @@ export default function Info() {
         />
       )}
       {isLoading && <LoaderText text='Episodes' />}
-
       {error && <p>Try again later.</p>}
       {!filteredData?.length && !isLoading && <p>No episodes found.</p>}
       <div className='flex flex-col items-start'>
