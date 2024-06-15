@@ -12,7 +12,7 @@ export default defineConfig({
       includeAssets: ['favicon.ico', 'apple-touch-icon.png', 'mask-icon.svg'],
       manifest: {
         name: 'Kaonashi',
-        short_name: 'a@t',
+        short_name: 'Kaonashi',
         theme_color: '#ffffff',
         icons: [
           {
