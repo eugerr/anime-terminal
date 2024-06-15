@@ -74,3 +74,9 @@
     @apply bg-background text-foreground overflow-x-hidden;
   }
 }
+
+.vt323-regular {
+  font-family: 'VT323', monospace;
+  font-weight: 400;
+  font-style: normal;
+}

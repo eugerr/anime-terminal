@@ -11,7 +11,7 @@ export default defineConfig({
       registerType: 'autoUpdate',
       includeAssets: ['favicon.ico', 'apple-touch-icon.png', 'mask-icon.svg'],
       manifest: {
-        name: 'anime@terminal',
+        name: 'Kaonashi',
         short_name: 'a@t',
         theme_color: '#ffffff',
         icons: [

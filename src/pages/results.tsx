@@ -1,10 +1,11 @@
-import { Helmet } from 'react-helmet'
+import Commands from '@/components/commands'
 import LoaderText from '@/components/loader-text'
 import { useEnterKeyPress, useEscapeKeyPress } from '@/hooks/enterKey'
 import { searchAnime } from '@/lib/anime'
 import { cn } from '@/lib/utils'
 import { useQuery } from '@tanstack/react-query'
 import { useEffect, useState } from 'react'
+import { Helmet } from 'react-helmet'
 import { Link, useNavigate, useParams } from 'react-router-dom'
 
 export default function Results() {
@@ -50,6 +51,10 @@ export default function Results() {
     navigate(`/episodes/${data?.results?.[selectedItemIndex].id}`)
   )
 
+  if (id === 'help') {
+    return <Commands />
+  }
+
   return (
     <div>
       <Helmet>
@@ -73,9 +78,8 @@ export default function Results() {
               key={item.id}
               onClick={() => navigate(`/episodes/${item.id}`)}
               className={cn(
-                index === selectedItemIndex &&
-                  'underline hover:after:scale-x-0',
-                'hover:underline'
+                index === selectedItemIndex && 'bg-foreground text-background',
+                'hover:bg-foreground hover:text-background'
               )}
             >
               {item.title.english || item.title.userPreferred}

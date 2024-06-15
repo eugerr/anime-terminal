@@ -1,6 +1,6 @@
-# Anime@Terminal
+# Kaonashi
 
-Anime@Terminal is a minimalist anime streaming website with a unique terminal-inspired interface.
+Kaonashi is a minimalist anime streaming website with a unique terminal-inspired interface.
 
 ## Features:
 
@@ -26,7 +26,7 @@ Anime@Terminal is a minimalist anime streaming website with a unique terminal-in
 
 ## Getting Started:
 
-Visit [Anime@Terminal](https://anime-terminal.onrender.com/) to start streaming immediately.
+Visit [Kaonashi](https://anime-terminal.onrender.com/) to start streaming immediately.
 
 ## Contributing:
 
@@ -38,6 +38,6 @@ For inquiries or assistance, contact support@anime-at-terminal.com.
 
 ## License:
 
-Anime@Terminal is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
+Kaonashi is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
 
-Thank you for choosing Anime@Terminal! Enjoy your anime streaming experience! 🚀🎉
+Thank you for choosing Kaonashi! Enjoy your anime streaming experience! 🚀🎉

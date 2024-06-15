@@ -90,7 +90,7 @@ export default function Info() {
       {!isLoading && (
         <Input
           ref={inputRef}
-          className='w-fit border border-input mb-5'
+          className='w-fit text-yellow-500 px-0 mb-5'
           type='number'
           placeholder='Search by number...'
           value={searchQuery}
@@ -116,8 +116,8 @@ export default function Info() {
             }}
             key={item.id}
             className={cn(
-              index === selectedItemIndex && 'underline hover:after:scale-x-0',
-              'hover:underline'
+              index === selectedItemIndex && 'bg-foreground text-background',
+              'hover:bg-foreground hover:text-background'
             )}
           >
             Episode {item.number} {item.title && ` - ${item.title}`}{' '}

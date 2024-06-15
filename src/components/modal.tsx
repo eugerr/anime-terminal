@@ -78,8 +78,10 @@ export function Modal({
       <DialogContent className='p-0 bg-transparent'>
         {isLoading && (
           <>
-            <LoaderText text='Video' />
-            <Skeleton className='h-[45vh]' />
+            <div className='mt-2 ml-2'>
+              <LoaderText text='Video' />
+            </div>
+            <Skeleton className='h-[45vh] bg-secondary m-2' />
           </>
         )}
 
